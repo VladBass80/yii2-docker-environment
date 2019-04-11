@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+
+  psql:
+    build:
+      context: ./dockerfiles
+      dockerfile: postgres.docker
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1111
+    volumes:
+      - ./dockerfiles/postgres//db:/var/lib/postgresql/data
+      - ./dockerfiles/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.docker
+    volumes:
+      - ../../wmp-core:/var/www/html
+      - ./dockerfiles/php/composer:/root/.composer/cache
+    ports:
+      - 9000:9000
+
+  nginx:
+    build:
+      context: ./dockerfiles
+      dockerfile: nginx.docker
+    volumes:
+      - ../../wmp-core:/var/www/html
+    depends_on:
+      - php
+    ports:
+      - 80:80
