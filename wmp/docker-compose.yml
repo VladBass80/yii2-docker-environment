@@ -11,6 +11,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
+#      LANG: ru_RU.UTF-8
     volumes:
       - ./dockerfiles/postgres//db:/var/lib/postgresql/data
       - ./dockerfiles/postgres/init:/docker-entrypoint-initdb.d
@@ -37,3 +38,15 @@ services:
       - php
     ports:
       - 80:80
+
+  elasticsearch:
+    build:
+      context: ./dockerfiles
+      dockerfile: elasticsearch.docker
+    restart: always
+    environment:
+      discovery.type: single-node
+    volumes:
+      - ./dockerfiles/elastic/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200

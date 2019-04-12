@@ -1,2 +1,1 @@
 FROM postgres
-#ENV LANG ru_RU.utf8
