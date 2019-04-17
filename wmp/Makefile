@@ -13,3 +13,14 @@ docker-build:
 	docker-compose build
 docker-pull:
 	docker-compose pull
+
+# Сопутствующие команды
+grunt-frontend: grunt-build
+#	docker run --rm -v ${PWD}/../../wmp-core/frontend/grunt:/app local/grunt npm install
+	docker run --rm -v ${PWD}/../../wmp-core/frontend/grunt:/app local/grunt grunt
+grunt-mobile: grunt-build
+#	docker run --rm -v ${PWD}/../../wmp-core/mobile/grunt:/app local/grunt npm install
+	docker run --rm -v ${PWD}/../../wmp-core/mobile/grunt:/app local/grunt grunt
+
+grunt-build:
+	docker build - < dockerfiles/grunt.docker -t local/grunt
