@@ -34,10 +34,11 @@ services:
       dockerfile: nginx.docker
     volumes:
       - ../../wmp-core:/var/www/html
+      - ./dockerfiles/nginx/logs:/etc/nginx/logs
     depends_on:
       - php
     ports:
-      - 80:80
+      - 127.0.0.1:80:80
 
   elasticsearch:
     build:
