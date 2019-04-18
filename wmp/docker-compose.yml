@@ -26,7 +26,6 @@ services:
       dockerfile: php.docker
     environment:
       XDEBUG_CONFIG: "remote_host=172.17.0.1 remote_port=9005 remote_enable=1"
-#      PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
       - ../../wmp-core:/var/www/html
       - ./dockerfiles/php/composer:/root/.composer/cache
