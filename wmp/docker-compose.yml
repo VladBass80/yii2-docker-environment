@@ -44,6 +44,13 @@ services:
     ports:
       - 127.0.0.1:80:80
 
+  memcached:
+    build:
+      context: ./dockerfiles
+      dockerfile: memcached.docker
+    ports:
+      - 11211:11211
+
   elasticsearch:
     build:
       context: ./dockerfiles
