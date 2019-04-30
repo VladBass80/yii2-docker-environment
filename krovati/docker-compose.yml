@@ -29,7 +29,8 @@ services:
 #    user: 1000:1000
     volumes:
 #      - /etc/passwd:/etc/passwd:ro
-      - ../../krovati:/var/www/html
+      - ../../krovati:/var/www/html/krovati
+      - ../../core:/var/www/html/core
       - ./dockerfiles/php/composer:/root/.composer/cache
     ports:
       - 9000:9000
