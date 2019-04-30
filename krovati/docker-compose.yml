@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+
+  psql:
+    build:
+      context: ./dockerfiles
+      dockerfile: postgres.docker
+    restart: always
+    environment:
+#      LANG: ru_RU.UTF-8
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1111
+    user: 1000:1000
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - ./dockerfiles/postgres/db:/var/lib/postgresql/data
+      - ./dockerfiles/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.docker
+    environment:
+      XDEBUG_CONFIG: "remote_host=172.17.0.1 remote_port=9005 remote_enable=1"
+#    user: 1000:1000
+    volumes:
+#      - /etc/passwd:/etc/passwd:ro
+      - ../../krovati:/var/www/html
+      - ./dockerfiles/php/composer:/root/.composer/cache
+    ports:
+      - 9000:9000
+
+  nginx:
+    build:
+      context: ./dockerfiles
+      dockerfile: nginx.docker
+    volumes:
+      - ../../krovati:/var/www/html
+      - ./dockerfiles/nginx/logs:/etc/nginx/logs
+    depends_on:
+      - php
+    ports:
+      - 127.0.0.1:80:80
+
+  memcached:
+    build:
+      context: ./dockerfiles
+      dockerfile: memcached.docker
+    ports:
+      - 11211:11211
