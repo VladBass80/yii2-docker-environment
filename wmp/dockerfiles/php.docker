@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         zlib1g-dev zip \
         libpq-dev\
-		libmagickwand-dev \
+		libmagickwand-dev --no-install-recommends \
 		libmemcached-dev \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 	&& docker-php-ext-install pdo pdo_pgsql \
 	&& pecl install xdebug-2.6.1 \
 	&& docker-php-ext-enable xdebug \
-	&& pecl install imagick \
+	&& pecl install imagick-3.4.3 \
 	&& docker-php-ext-enable imagick \
 	&& pecl install memcached \
 	&& docker-php-ext-enable memcached
