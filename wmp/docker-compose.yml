@@ -15,7 +15,7 @@ services:
     user: 1000:1000
     volumes:
       - /etc/passwd:/etc/passwd:ro
-      - ./dockerfiles/postgres//db:/var/lib/postgresql/data
+      - ./dockerfiles/postgres/db:/var/lib/postgresql/data
       - ./dockerfiles/postgres/init:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
