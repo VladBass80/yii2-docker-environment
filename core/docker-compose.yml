@@ -9,12 +9,12 @@ services:
     restart: always
     environment:
 #      LANG: ru_RU.UTF-8
-      POSTGRES_DB: postgres
+      POSTGRES_DB: core
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1111
-#    user: 1000:1000
+    user: 1000:1000
     volumes:
-#      - /etc/passwd:/etc/passwd:ro
+      - /etc/passwd:/etc/passwd:ro
       - ./dockerfiles/postgres/db:/var/lib/postgresql/data
       - ./dockerfiles/postgres/init:/docker-entrypoint-initdb.d
     ports:
