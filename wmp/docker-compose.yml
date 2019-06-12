@@ -39,6 +39,7 @@ services:
       context: ./dockerfiles
       dockerfile: nginx.docker
     volumes:
+      - ./dockerfiles/nginx/init:/etc/nginx/conf.d
       - ../../wmp-core:/var/www/html
       - ./dockerfiles/nginx/logs:/etc/nginx/logs
     depends_on:
