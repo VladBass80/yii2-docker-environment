@@ -16,11 +16,17 @@ docker-pull:
 
 # Сопутствующие команды
 grunt-desktop: grunt-build
-	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/frontend/grunt local/grunt npm install
+#	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/frontend/grunt local/grunt npm install
 	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/frontend/grunt local/grunt grunt
 grunt-mobile: grunt-build
-	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/mobile/grunt local/grunt npm install
+#	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/mobile/grunt local/grunt npm install
 	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/mobile/grunt local/grunt grunt mobile
 
 grunt-build:
 	docker build - < dockerfiles/grunt.docker -t local/grunt
+
+webpack-init: webpack
+	docker run --rm -v ${PWD}/../../wmp-core:/app --workdir /app/mobile local/webpack npm install
+
+webpack:
+	docker build - < dockerfiles/node.docker -t local/webpack

@@ -65,3 +65,12 @@ services:
       - ./dockerfiles/elastic/data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+
+  node:
+    build:
+      context: ./dockerfiles
+      dockerfile: node.docker
+    restart: always
+    volumes:
+      - ../../wmp-core:/app
+    command: npm run development
