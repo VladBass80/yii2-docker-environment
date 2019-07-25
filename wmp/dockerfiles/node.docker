@@ -1,6 +1,5 @@
 FROM node
 
-
 WORKDIR /app/mobile
 
 RUN apt-get update

@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         libpng-dev \
         zlib1g-dev zip \
-        libpq-dev\
+        libpq-dev \
 		libmagickwand-dev --no-install-recommends \
 		libmemcached-dev \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
