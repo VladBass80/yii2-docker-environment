@@ -54,17 +54,17 @@ services:
     ports:
       - 11211:11211
 
-  elasticsearch:
-    build:
-      context: ./dockerfiles
-      dockerfile: elasticsearch.docker
-    restart: always
-    environment:
-      discovery.type: single-node
-    volumes:
-      - ./dockerfiles/elastic/data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
+#  elasticsearch:
+#    build:
+#      context: ./dockerfiles
+#      dockerfile: elasticsearch.docker
+#    restart: always
+#    environment:
+#      discovery.type: single-node
+#    volumes:
+#      - ./dockerfiles/elastic/data:/usr/share/elasticsearch/data
+#    ports:
+#      - 9200:9200
 
   node:
     build:
